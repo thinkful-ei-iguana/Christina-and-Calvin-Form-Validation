@@ -17,9 +17,38 @@ class App extends Component {
   };
 
   componentDidMount() {
-    // fake date loading from API call
     //this will be the fetch requests being stored in the dummystate, populating notes/folders
-    setTimeout(() => this.setState(dummyStore), 6);
+    
+
+    fetch(`http://localhost:9090/notes`)
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error(res.statusText);
+        }
+      })
+      .then(data => {
+        this.setState({notes: [...data]});
+        //console.log(data);
+        //console.log(this.state.notes);
+      })
+      .catch(e => console.log(e));
+    
+    fetch(`http://localhost:9090/folders`)
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error(res.statusText);
+        }
+      })
+      .then(data => {
+        this.setState({folders: [...data]});
+        console.log(data);
+        console.log(this.state.notes);
+      })
+      .catch(e => console.log(e));
   }
 
   renderNavRoutes() {
