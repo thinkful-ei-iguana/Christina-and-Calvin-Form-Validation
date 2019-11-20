@@ -29,8 +29,6 @@ class App extends Component {
       })
       .then(data => {
         this.setState({ notes: [...data] });
-        //console.log(data);
-        //console.log(this.state.notes);
       })
       .catch(e => console.log(e));
 
@@ -44,8 +42,6 @@ class App extends Component {
       })
       .then(data => {
         this.setState({ folders: [...data] });
-        console.log(data);
-        console.log(this.state.notes);
       })
       .catch(e => console.log(e));
   }
