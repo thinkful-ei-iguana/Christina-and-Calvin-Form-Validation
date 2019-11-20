@@ -18,7 +18,6 @@ class App extends Component {
 
   componentDidMount() {
     //this will be the fetch requests being stored in the dummystate, populating notes/folders
-    
 
     fetch(`http://localhost:9090/notes`)
       .then(res => {
@@ -29,12 +28,12 @@ class App extends Component {
         }
       })
       .then(data => {
-        this.setState({notes: [...data]});
+        this.setState({ notes: [...data] });
         //console.log(data);
         //console.log(this.state.notes);
       })
       .catch(e => console.log(e));
-    
+
     fetch(`http://localhost:9090/folders`)
       .then(res => {
         if (res.ok) {
@@ -44,12 +43,18 @@ class App extends Component {
         }
       })
       .then(data => {
-        this.setState({folders: [...data]});
+        this.setState({ folders: [...data] });
         console.log(data);
         console.log(this.state.notes);
       })
       .catch(e => console.log(e));
   }
+
+  handleDeleteNote = noteId => {
+    this.setState({
+      notes: this.state.notes.filter(note => note.id !== noteId)
+    });
+  };
 
   renderNavRoutes() {
     const { notes, folders } = this.state;
@@ -114,7 +119,8 @@ class App extends Component {
         <noteContext.Provider
           value={{
             folders: this.state.folders,
-            notes: this.state.notes
+            notes: this.state.notes,
+            deleteNote: this.handleDeleteNote
           }}
         >
           <nav className="App__nav">{this.renderNavRoutes()}</nav>
