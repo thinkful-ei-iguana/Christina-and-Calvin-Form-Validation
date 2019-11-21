@@ -20,16 +20,17 @@ import NoteListNav from "../NoteListNav/NoteListNav";
 import NotePageNav from "../NotePageNav/NotePageNav";
 import NoteListMain from "../NoteListMain/NoteListMain";
 import NotePageMain from "../NotePageMain/NotePageMain";
-import dummyStore from "../dummy-store";
+// import dummyStore from "../dummy-store";
 import { getNotesForFolder, findNote, findFolder } from "../notes-helpers";
 import "./App.css";
 import noteContext from "../NoteContext";
-import addFolder from "../AddingFolder";
+import AddFolder from "../AddingFolder/AddFolder";
 
 class App extends Component {
   state = {
     notes: [],
-    folders: []
+    folders: [],
+ 
   };
 
   componentDidMount() {
@@ -62,9 +63,16 @@ class App extends Component {
       .catch(e => console.log(e));
   }
 
-  handleAddFolder = prop => {
-    this.setState({});
-  };
+  handleAddFolder = fldr => {
+    // onclick(
+    this.setState((state, props) => ({
+      folders: state.folders + this.props.fldr
+    })
+  
+    )};
+
+    
+
 
   handleDeleteNote = noteId => {
     this.setState({
@@ -117,6 +125,14 @@ class App extends Component {
             }}
           />
         ))}
+        <Route 
+          exact
+           path="/add-folder" 
+           render={routeProps =>{
+             return <AddFolder {...routeProps}/>
+            }}
+         />
+          
         <Route
           path="/note/:noteId"
           render={routeProps => {

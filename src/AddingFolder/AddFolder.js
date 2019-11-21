@@ -2,7 +2,7 @@
 //to the server (ensure any errors are handled) add a button to invoke the form
 import React, { Component } from "react";
 
-class addFolder extends Component {
+class AddFolder extends Component {
   // export default addFolder = event => {
   state = { fldr: { value: "" } };
   setFldr = fldr => {
@@ -14,19 +14,19 @@ class addFolder extends Component {
       <div>
         <form>
           <input
-            id="addFldr"
+            id="fldr"
             type="text"
-            value={this.state.addFldr.value}
+            value={this.state.fldr.value}
             onChange={e => {
               this.setFldr(e.target.value);
             }}
           />
-          <label>
-            FolderName: <input type="text" name="name" />
+          <label className="folderLabel">
+            New Folder: <input type="" name="name" />
           </label>
         </form>
       </div>
     );
   }
 }
-export default addFolder;
+export default AddFolder;
