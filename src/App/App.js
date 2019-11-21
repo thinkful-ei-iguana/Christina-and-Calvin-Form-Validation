@@ -24,6 +24,7 @@ import dummyStore from "../dummy-store";
 import { getNotesForFolder, findNote, findFolder } from "../notes-helpers";
 import "./App.css";
 import noteContext from "../NoteContext";
+import addFolder from "../AddingFolder";
 
 class App extends Component {
   state = {
@@ -60,6 +61,10 @@ class App extends Component {
       })
       .catch(e => console.log(e));
   }
+
+  handleAddFolder = prop => {
+    this.setState({});
+  };
 
   handleDeleteNote = noteId => {
     this.setState({
