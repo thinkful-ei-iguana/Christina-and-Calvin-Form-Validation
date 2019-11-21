@@ -129,7 +129,7 @@ class App extends Component {
           exact
            path="/add-folder" 
            render={routeProps =>{
-             return <AddFolder {...routeProps}/>
+             return <AddFolder addFolder={this.handleAddFolder} {...routeProps}/>
             }}
          />
           

@@ -10,20 +10,21 @@ class AddFolder extends Component {
   };
   // e.preventDefault()
   render() {
+    const { addFolder } = this.props
     return (
       <div>
-        <form>
+        <form onSubmit={
+          addFolder
+         }>
           <input
             id="fldr"
             type="text"
-            value={this.state.fldr.value}
-            onChange={e => {
-              this.setFldr(e.target.value);
-            }}
+            value={this.state.fldr.value}            
           />
           <label className="folderLabel">
             New Folder: <input type="" name="name" />
           </label>
+          <button type="submit">Submit</button>
         </form>
       </div>
     );
