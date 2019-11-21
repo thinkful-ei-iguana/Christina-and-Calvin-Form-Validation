@@ -10,20 +10,35 @@ class AddFolder extends Component {
   };
   // e.preventDefault()
   render() {
-    const { addFolder } = this.props
+    const { addFolder } = this.props;
     return (
       <div>
-        <form onSubmit={
-          addFolder
-         }>
-          <input
-            id="fldr"
-            type="text"
-            value={this.state.fldr.value}            
-          />
-          <label className="folderLabel">
-            New Folder: <input type="" name="name" />
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+            const oisdv = { name: e.target.name.value };
+            fetch(`http://localhost:9090/folders`, {
+              method: "POST",
+              body: JSON.stringify(oisdv),
+              headers: { "Content-Type": "application/json" }
+            })
+              .then(res => {
+                if (res.ok) {
+                  return res.json();
+                } else {
+                  throw new Error(res.statusText);
+                }
+              })
+
+              .then(json => {
+                addFolder(json);
+              });
+          }}
+        >
+          <label htmlFor="inputId" className="folderLabel">
+            New Folder:
           </label>
+          <input id="inputId" type="" name="name" />
           <button type="submit">Submit</button>
         </form>
       </div>

@@ -25,12 +25,12 @@ import { getNotesForFolder, findNote, findFolder } from "../notes-helpers";
 import "./App.css";
 import noteContext from "../NoteContext";
 import AddFolder from "../AddingFolder/AddFolder";
+import AddNote from "../AddingNote/AddNote";
 
 class App extends Component {
   state = {
     notes: [],
-    folders: [],
- 
+    folders: []
   };
 
   componentDidMount() {
@@ -63,16 +63,18 @@ class App extends Component {
       .catch(e => console.log(e));
   }
 
+  handleAddNote = newNote => {
+    console.log(newNote);
+    this.setState({
+      notes: [...this.state.notes, newNote]
+    });
+  };
+
   handleAddFolder = fldr => {
-    // onclick(
-    this.setState((state, props) => ({
-      folders: state.folders + this.props.fldr
-    })
-  
-    )};
-
-    
-
+    this.setState({
+      folders: [...this.state.folders, fldr]
+    });
+  };
 
   handleDeleteNote = noteId => {
     this.setState({
@@ -125,14 +127,28 @@ class App extends Component {
             }}
           />
         ))}
-        <Route 
+        <Route
           exact
-           path="/add-folder" 
-           render={routeProps =>{
-             return <AddFolder addFolder={this.handleAddFolder} {...routeProps}/>
-            }}
-         />
-          
+          path="/add-folder"
+          render={routeProps => {
+            return (
+              <AddFolder addFolder={this.handleAddFolder} {...routeProps} />
+            );
+          }}
+        />
+        <Route
+          exact
+          path="/add-note"
+          render={routeProps => {
+            return (
+              <AddNote
+                addNote={this.handleAddNote}
+                {...routeProps}
+                folders={this.state.folders}
+              />
+            );
+          }}
+        />
         <Route
           path="/note/:noteId"
           render={routeProps => {
