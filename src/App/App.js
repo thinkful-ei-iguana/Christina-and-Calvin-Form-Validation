@@ -1,3 +1,18 @@
+//two forms for POSTing new folders and new Notes to the server
+//refactor components to use PropTypes to validate props
+
+//make component AddFolder which creates a form which takes a single item and sends it via endpoint
+//to the server (ensure any errors are handled) add a button to invoke the form
+
+//create component AddNote which implements (name, content, folderId), submit to endpoint /notes
+//add validation to the note, make sure it has a name, the folder should be selected from a list of
+//existing folders, ensure the errors are handled, add a button to invoke note adding
+
+//define error boundary component, add this component to specific points in your component structure
+
+//review each components you've built so far, make sure any component that receives props from its parents
+//that it receives PropType validation
+
 import React, { Component } from "react";
 import { Route, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

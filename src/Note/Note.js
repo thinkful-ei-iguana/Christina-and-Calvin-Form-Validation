@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Note.css";
-import noteContext from "./NoteContext";
+import noteContext from "../NoteContext";
 
 export default class Note extends React.Component {
   static contextType = noteContext;
