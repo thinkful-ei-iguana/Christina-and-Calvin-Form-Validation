@@ -26,6 +26,7 @@ import "./App.css";
 import noteContext from "../NoteContext";
 import AddFolder from "../AddingFolder/AddFolder";
 import AddNote from "../AddingNote/AddNote";
+import ErrorPage from "../Error Boundary/ErrorBoundaryHandling";
 
 class App extends Component {
   state = {
@@ -47,6 +48,7 @@ class App extends Component {
       .then(data => {
         this.setState({ notes: [...data] });
       })
+
       .catch(e => console.log(e));
 
     fetch(`http://localhost:9090/folders`)
@@ -64,7 +66,6 @@ class App extends Component {
   }
 
   handleAddNote = newNote => {
-    console.log(newNote);
     this.setState({
       notes: [...this.state.notes, newNote]
     });
@@ -85,7 +86,7 @@ class App extends Component {
   renderNavRoutes() {
     const { notes, folders } = this.state;
     return (
-      <>
+      <ErrorPage>
         {["/", "/folder/:folderId"].map(path => (
           <Route
             exact
@@ -107,14 +108,14 @@ class App extends Component {
         />
         <Route path="/add-folder" component={NotePageNav} />
         <Route path="/add-note" component={NotePageNav} />
-      </>
+      </ErrorPage>
     );
   }
 
   renderMainRoutes() {
     const { notes } = this.state;
     return (
-      <>
+      <ErrorPage>
         {["/", "/folder/:folderId"].map(path => (
           <Route
             exact
@@ -157,7 +158,7 @@ class App extends Component {
             return <NotePageMain {...routeProps} note={note} />;
           }}
         />
-      </>
+      </ErrorPage>
     );
   }
 

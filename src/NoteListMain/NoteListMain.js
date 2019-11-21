@@ -11,7 +11,6 @@ export default class NoteListMain extends React.Component {
 
   render() {
     const { notes } = this.context;
-
     return (
       <section className="NoteListMain">
         <ul>
