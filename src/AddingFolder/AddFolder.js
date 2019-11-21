@@ -2,21 +2,31 @@
 //to the server (ensure any errors are handled) add a button to invoke the form
 import React, { Component } from "react";
 
-
-class addFolder extends Component{
-// export default addFolder = event => {
-    
-    e.preventDefault()
-    render() {
-        return (
-            <div>
-                <form>
-                <input type="submit" value="Submit" />
-                <label>
-                    Name: <input type="text" name="name" />
-                </label>
-                </form>
-            </div>
-        );
-      }
-};
+class addFolder extends Component {
+  // export default addFolder = event => {
+  state = { fldr: { value: "" } };
+  setFldr = fldr => {
+    this.setState({ fldr: { value: fldr } });
+  };
+  // e.preventDefault()
+  render() {
+    return (
+      <div>
+        <form>
+          <input
+            id="addFldr"
+            type="text"
+            value={this.state.addFldr.value}
+            onChange={e => {
+              this.setFldr(e.target.value);
+            }}
+          />
+          <label>
+            FolderName: <input type="text" name="name" />
+          </label>
+        </form>
+      </div>
+    );
+  }
+}
+export default addFolder;
